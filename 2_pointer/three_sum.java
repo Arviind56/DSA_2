@@ -27,7 +27,7 @@ class Solution {
 
                 if (currentsum == target) {
                     // Found a valid triplet
-                    li.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    triplets.add(Arrays.asList(nums[i], nums[left], nums[right]));
 
                     // Skip duplicate values for the second element
                     while (left < right && nums[left] == nums[left + 1]) {
@@ -48,7 +48,7 @@ class Solution {
                 }
             }
         }
-        return li;
+        return triplets;
     }
 }
 

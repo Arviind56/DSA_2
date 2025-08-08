@@ -1,0 +1,124 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif" font-size="14">
+    <!-- Background and Title -->
+    <rect width="100%" height="100%" fill="#f9fafb"/>
+    <text x="400" y="40" font-size="22" font-weight="bold" text-anchor="middle">HashMap (Prefix Sum) Approach</text>
+    <text x="400" y="65" font-size="16" text-anchor="middle">Correctly handles positive and negative numbers</text>
+
+    <!-- Array and Key -->
+    <g id="setup">
+        <text x="50" y="110" font-weight="bold">Array:</text>
+        <rect x="110" y="90" width="40" height="40" fill="#e0f2fe" stroke="#0ea5e9" rx="5"/><text x="130" y="115" text-anchor="middle" font-size="16">1</text>
+        <rect x="160" y="90" width="40" height="40" fill="#e0f2fe" stroke="#0ea5e9" rx="5"/><text x="180" y="115" text-anchor="middle" font-size="16">2</text>
+        <rect x="210" y="90" width="40" height="40" fill="#e0f2fe" stroke="#0ea5e9" rx="5"/><text x="230" y="115" text-anchor="middle" font-size="16">3</text>
+        <rect x="260" y="90" width="40" height="40" fill="#fecaca" stroke="#ef4444" rx="5"/><text x="280" y="115" text-anchor="middle" font-size="16">-3</text>
+        <rect x="310" y="90" width="40" height="40" fill="#e0f2fe" stroke="#0ea5e9" rx="5"/><text x="330" y="115" text-anchor="middle" font-size="16">1</text>
+        <rect x="360" y="90" width="40" height="40" fill="#e0f2fe" stroke="#0ea5e9" rx="5"/><text x="380" y="115" text-anchor="middle" font-size="16">1</text>
+        <rect x="410" y="90" width="40" height="40" fill="#e0f2fe" stroke="#0ea5e9" rx="5"/><text x="430" y="115" text-anchor="middle" font-size="16">1</text>
+        <text x="480" y="110" font-weight="bold">Target Sum (k) = 3</text>
+    </g>
+
+    <!-- Core Logic -->
+    <g id="logic">
+        <rect x="50" y="150" width="700" height="50" fill="#fefce8" stroke="#eab308" rx="8"/>
+        <text x="400" y="180" text-anchor="middle" font-size="16" font-weight="bold">
+            Core Idea: For each running total `tsum`, check if `(tsum - k)` is in the HashMap.
+        </text>
+    </g>
+
+    <!-- Table Header -->
+    <g id="table-header" font-weight="bold">
+        <rect x="50" y="220" width="700" height="30" fill="#e5e7eb"/>
+        <text x="75" y="240">Step (i)</text>
+        <text x="155" y="240">Current Num</text>
+        <text x="270" y="240">Running Sum (tsum)</text>
+        <text x="410" y="240">Target (tsum - k)</text>
+        <text x="525" y="240">HashMap State</text>
+        <text x="690" y="240">Count</text>
+    </g>
+
+    <!-- Table Rows -->
+    <g id="table-rows" font-family="monospace">
+        <!-- Initial State -->
+        <rect x="50" y="250" width="700" height="30" fill="#f3f4f6"/>
+        <text x="70" y="270">Start</text>
+        <text x="175" y="270">-</text>
+        <text x="300" y="270">0</text>
+        <text x="430" y="270">-</text>
+        <text x="520" y="270">{0: 1}</text>
+        <text x="700" y="270">0</text>
+
+        <!-- i = 0 -->
+        <rect x="50" y="280" width="700" height="30" fill="white"/>
+        <text x="85" y="300">0</text>
+        <text x="175" y="300">1</text>
+        <text x="300" y="300">1</text>
+        <text x="420" y="300">1-3 = -2</text>
+        <text x="520" y="300">{0:1, 1:1}</text>
+        <text x="700" y="300">0</text>
+
+        <!-- i = 1 -->
+        <rect x="50" y="310" width="700" height="30" fill="#dcfce7"/>
+        <text x="85" y="330">1</text>
+        <text x="175" y="330">2</text>
+        <text x="300" y="330">3</text>
+        <text x="420" y="330" font-weight="bold">3-3 = 0</text>
+        <text x="520" y="330">{..., 3:1}</text>
+        <text x="700" y="330" font-weight="bold">1</text>
+        <text x="465" y="330" font-size="10" fill="#14532d" font-weight="bold">(Found 0 in map!)</text>
+
+        <!-- i = 2 -->
+        <rect x="50" y="340" width="700" height="30" fill="#dcfce7"/>
+        <text x="85" y="360">2</text>
+        <text x="175" y="360">3</text>
+        <text x="300" y="360">6</text>
+        <text x="420" y="360" font-weight="bold">6-3 = 3</text>
+        <text x="520" y="360">{..., 6:1}</text>
+        <text x="700" y="360" font-weight="bold">2</text>
+        <text x="465" y="360" font-size="10" fill="#14532d" font-weight="bold">(Found 3 in map!)</text>
+
+        <!-- i = 3 -->
+        <rect x="50" y="370" width="700" height="30" fill="#dcfce7"/>
+        <text x="85" y="390">3</text>
+        <text x="170" y="390">-3</text>
+        <text x="300" y="390">3</text>
+        <text x="420" y="390" font-weight="bold">3-3 = 0</text>
+        <text x="520" y="390">{..., 3:2}</text>
+        <text x="700" y="390" font-weight="bold">3</text>
+        <text x="465" y="390" font-size="10" fill="#14532d" font-weight="bold">(Found 0 in map!)</text>
+
+        <!-- i = 4 -->
+        <rect x="50" y="400" width="700" height="30" fill="#dcfce7"/>
+        <text x="85" y="420">4</text>
+        <text x="175" y="420">1</text>
+        <text x="300" y="420">4</text>
+        <text x="420" y="420" font-weight="bold">4-3 = 1</text>
+        <text x="520" y="420">{..., 4:1}</text>
+        <text x="700" y="420" font-weight="bold">4</text>
+        <text x="465" y="420" font-size="10" fill="#14532d" font-weight="bold">(Found 1 in map!)</text>
+
+        <!-- i = 5 -->
+        <rect x="50" y="430" width="700" height="30" fill="white"/>
+        <text x="85" y="450">5</text>
+        <text x="175" y="450">1</text>
+        <text x="300" y="450">5</text>
+        <text x="420" y="450">5-3 = 2</text>
+        <text x="520" y="450">{..., 5:1}</text>
+        <text x="700" y="450">4</text>
+
+        <!-- i = 6 -->
+        <rect x="50" y="460" width="700" height="30" fill="#dcfce7"/>
+        <text x="85" y="480">6</text>
+        <text x="175" y="480">1</text>
+        <text x="300" y="480">6</text>
+        <text x="420" y="480" font-weight="bold">6-3 = 3</text>
+        <text x="520" y="480">{..., 6:2}</text>
+        <text x="700" y="480" font-weight="bold">6</text>
+        <text x="465" y="480" font-size="10" fill="#14532d" font-weight="bold">(Found 3, value is 2!)</text>
+        
+        <!-- Final Result -->
+        <rect x="50" y="520" width="700" height="50" fill="#dbeafe" stroke="#3b82f6" rx="8"/>
+        <text x="400" y="550" text-anchor="middle" font-size="20" font-weight="bold">
+            Final Count: 6
+        </text>
+    </g>
+</svg>
